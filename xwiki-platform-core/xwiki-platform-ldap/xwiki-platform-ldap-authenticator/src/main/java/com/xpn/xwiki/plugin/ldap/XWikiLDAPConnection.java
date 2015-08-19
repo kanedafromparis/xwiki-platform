@@ -150,9 +150,9 @@ public class XWikiLDAPConnection
         }
 
         try {
+             XWikiLDAPConfig config = XWikiLDAPConfig.getInstance();
             if (ssl) {
-                XWikiLDAPConfig config = XWikiLDAPConfig.getInstance();
-
+           
                 // Dynamically set JSSE as a security provider
                 Security.addProvider(config.getSecureProvider(context));
 
@@ -184,7 +184,7 @@ public class XWikiLDAPConnection
             LDAPSearchConstraints constraints = new LDAPSearchConstraints(this.connection.getConstraints());
             constraints.setTimeLimit(getTimeout(context));
             constraints.setMaxResults(getMaxResults(context));
-            constraints.setReferralFollowing(true);
+            constraints.setReferralFollowing(config.isReferralFollowing(context));
             constraints.setReferralHandler(new LDAPPluginReferralHandler(loginDN, password, context));
             this.connection.setConstraints(constraints);
 

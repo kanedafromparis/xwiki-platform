@@ -308,6 +308,18 @@ public final class XWikiLDAPConfig
 
         return param != null && param.equals("1");
     }
+    
+    /**
+     * Get the parameter for 
+     * @param context
+     * @return true if Following referal is wanted (default is true)
+     */
+    public boolean isReferralFollowing(XWikiContext context)
+    {
+        String param = getLDAPParam("referralfollowing", "xwiki.authentication.ldap", "1", context);
+
+        return param != null && param.equals("1");
+    }
 
     /**
      * Get LDAP port from configuration.
